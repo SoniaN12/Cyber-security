@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logout {
+            text-decoration: none;
+            color: red;
+            font-weight: bold;
+        }
+
+        .add-password {
+            margin-top: 20px;
+        }
+
+        .add-password a {
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to your Dashboard</h1>
+        <a class="logout" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <div class="add-password">
+        <a href="{{ url_for('add_password') }}">+ Add New Password</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Username</th>
+                <th>Encrypted Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in passwords %}
+                <tr>
+                    <td>{{ entry[1] }}</td> <!-- service -->
+                    <td>{{ entry[2] }}</td> <!-- username -->
+                    <td>{{ entry[3] }}</td> <!-- encrypted_password -->
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">No passwords saved yet.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
